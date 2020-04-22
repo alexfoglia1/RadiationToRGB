@@ -1,5 +1,4 @@
 #include "converter.h"
-#include <math.h>
 
 Converter::Converter()
 {
@@ -11,8 +10,6 @@ Color Converter::convert(double frequency)
 
     double wavelength_m = lightspeed_m_s / frequency;
     double wavelength_nm = wavelength_m * 1e9;
-
-    double factor;
     double red,green,blue;
 
     if((wavelength_nm >= 380) && (wavelength_nm < 440))
@@ -58,27 +55,10 @@ Color Converter::convert(double frequency)
         blue = 0.0;
     }
 
-    if((wavelength_nm >= 380) && (wavelength_nm < 420))
-    {
-        factor = 0.3 + 0.7 * (wavelength_nm - 380) / (420 - 380);
-    }
-    else if((wavelength_nm >= 420) && (wavelength_nm < 701))
-    {
-        factor = 1.0;
-    }
-    else if((wavelength_nm >= 701) && (wavelength_nm < 781))
-    {
-        factor = 0.3 + 0.7 * (780 - wavelength_nm) / (780 - 700);
-    }
-    else
-    {
-        factor = 0.0;
-    }
-
     Color rgb;
-    rgb.red = red == 0.0 ? 0 : (uint8_t) round(max_rgb * pow(red * factor, mgamma));
-    rgb.green = green == 0.0 ? 0 : (uint8_t) round(max_rgb * pow(green * factor, mgamma));
-    rgb.blue = blue == 0.0 ? 0 : (uint8_t) round(max_rgb * pow(blue * factor, mgamma));
+    rgb.red = red == 0.0 ? 0 : static_cast<uint8_t>(max_rgb * red);
+    rgb.green = green == 0.0 ? 0 : static_cast<uint8_t>(max_rgb * green);
+    rgb.blue = blue == 0.0 ? 0 : static_cast<uint8_t>(max_rgb * blue);
 
     return rgb;
 }

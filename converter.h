@@ -12,7 +12,6 @@ struct Color
 };
 
 const auto lightspeed_m_s = 299792458.0;
-const auto mgamma = 0.8;
 const uint8_t max_rgb = std::numeric_limits<uint8_t>::max();
 
 class Converter
