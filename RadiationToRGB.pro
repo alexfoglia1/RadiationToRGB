@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    converter.cpp
+    converter.cpp \
+    rgbhashtable.cpp
 
 HEADERS += \
         mainwindow.h \
-    converter.h
+    converter.h \
+    rgbhashtable.h
 
 FORMS += \
         mainwindow.ui

@@ -9,9 +9,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    rgb_ht = new RGBHashTable();
+
     ui->lcdNumber_8->display(1e-19);
 
     mActualFrequency = (kMinFrequency + kMaxFrequency) / 2.0;
+    mActualFrequency = kMinFrequency;
     ui->lcdNumber_4->display(mActualFrequency);
     ui->horizontalSlider->setMinimum(kMinFrequency * 10.0);
     ui->horizontalSlider->setMaximum(kMaxFrequency * 10.0);
@@ -28,6 +31,8 @@ void MainWindow::updateColor(int value)
 
     double mActualFrequency_hz = mActualFrequency * 1e12;
     Color rgb = c.convert(mActualFrequency_hz);
+
+    rgb_ht->add(rgb.red, rgb.green, rgb.blue, mActualFrequency_hz);
 
     QString styleSheet = QString("background-color: rgb(%1, %2, %3)")
             .arg(rgb.red)

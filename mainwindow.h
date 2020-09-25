@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "converter.h"
+#include "rgbhashtable.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,8 +23,11 @@ private:
     const double kMaxFrequency = 780.0;
     double mActualFrequency;
     Converter c;
+    RGBHashTable* rgb_ht;
+
 public slots:
     void updateColor(int value);
+
 };
 
 #endif // MAINWINDOW_H
